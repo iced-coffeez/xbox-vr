@@ -9,7 +9,6 @@ So, you need some sort of computer that can provide:
 - An HDMI output (optionally)
 - USB
 - Some cable to connect the VR.
-</code>
 
 ## Prerequisites - Software
 The computer needs to have:
