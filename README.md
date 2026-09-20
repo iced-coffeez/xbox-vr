@@ -27,7 +27,7 @@ Currently:
 PSVR 1
 
 # Installing
-To do this, you need to clone the GitHub repository. You can achieve this by:
+To do this, you need to clone the GitHub repository. You can achieve this by:  
 <code>git clone https://github.com/iced-coffeez/xbox-vr</code>
 
 # brb ill finish l8r
