@@ -6,13 +6,9 @@ Anyway, enough yapping. Let's move to the project.
 ## Prerequisites - Hardware
 So, you need some sort of computer that can provide:
 
-<code>
-
-An HDMI output (optionally)
-
-USB
-
-Some cable to connect the VR.
+- An HDMI output (optionally)
+- USB
+- Some cable to connect the VR.
 </code>
 
 ## Prerequisites - Software
@@ -24,12 +20,8 @@ Linux (preferably some form of new-ish Debian)
 </code>
 
 ## Optional Prerequisites
-<code>
 
-Some computer knowledge
-
-Sanity
-
-Sleep
-</code>
+- Some computer knowledge
+- Sanity
+- Sleep
 # brb ill finish l8r
