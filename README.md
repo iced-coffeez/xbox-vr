@@ -13,11 +13,8 @@ So, you need some sort of computer that can provide:
 
 ## Prerequisites - Software
 The computer needs to have:
-<code>
-Python 3 (preferably >= 3)
-
-Linux (preferably some form of new-ish Debian)
-</code>
+- Python 3 (preferably >= 3)
+- Linux (preferably some form of new-ish Debian)
 
 ## Optional Prerequisites
 
