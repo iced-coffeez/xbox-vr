@@ -7,6 +7,7 @@ Anyway, enough yapping. Let's move to the project.
 So, you need some sort of computer that can provide:
 
 <code>
+
 An HDMI output (optionally)
 
 USB
@@ -24,6 +25,7 @@ Linux (preferably some form of new-ish Debian)
 
 ## Optional Prerequisites
 <code>
+
 Some computer knowledge
 
 Sanity
