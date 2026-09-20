@@ -7,7 +7,8 @@ Anyway, enough yapping. Let's move to the project.
 So, you need some sort of computer that can provide:
 
 <code>
-An HDMI output (optionally) \n
+An HDMI output (optionally)
+
 USB-A female
 </code>
 
