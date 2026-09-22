@@ -45,19 +45,25 @@ After that, make sure you have pip installed—or just use the built-in Python v
 You need to create a **venv** for the Python packages. A **venv** is just a directory where Python can put packages that don't interfere with your system.  
 
 Do this by running:  
-`python -m venv .venv`  
+```bash
+python -m venv .venv
+```
 
 The **venv** will be hidden, because of the leading dot. You will need to run `ls -la` or look in a file manager to find it.  
 
 You will need to activate the **venv** and install needed packages. You can do this in 2 ways:  
 
-<code>source .venv/bin/activate  
-python -m pip install pathlib simple_websocket flask flask_sock</code>  
+```bash
+source .venv/bin/activate  
+python -m pip install pathlib simple_websocket flask flask_sock
+```
 
 Or:
 
-<code>source .venv/bin/activate  
-pip3 install pathlib simple_websocket flask flask_sock</code>  
+```bash
+source .venv/bin/activate  
+pip3 install pathlib simple_websocket flask flask_sock
+```
 
 If neither work, try using just `pip` instead—or vice versa. In either option.
 
@@ -67,4 +73,6 @@ Finally, you are ready to run XBOX VR—after all of that pain.
 After this, you will want to hook up your headset of choice (if its supported—or you could just force it to be if you write your own drivers for it).  
 
 From the root of the project directory, run:  
-`sudo python3 main.py # sudo is optional if you're root—it would be redundant.`
+```bash
+sudo python3 main.py # sudo is optional if you're root—it would be redundant.
+```
