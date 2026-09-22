@@ -1,0 +1,76 @@
+<head>
+        <title>XBOX VR</title>
+
+	<script src="/static/js/aframe/aframe.min.js"></script>
+</head>
+
+<body>	
+
+        <style>
+        	html, body {
+                    background-color: rgb(12,12,12);
+                    text-align: center;
+                }
+                
+                h1, h2, h3, h4, h5, h6 {
+                    font-family: sans-serif;
+                    color: white;
+                }
+        </style>
+
+        <!-- <h1>
+        	XBOX VR
+	</h1> --!>
+
+	<a-scene>
+	    <a-box
+	        position="0 1.6 -3"
+	        rotation="0 45 0"
+	        color="red">
+	    </a-box>
+
+	    <a-plane
+	        position="0 0 -4"
+	        rotation="-90 0 0"
+	        width="20"
+	        height="20"
+	        color="#333">
+	    </a-plane>
+
+	    <a-sky color="#111"></a-sky>
+
+	    <a-camera position="0 1.6 0"></a-camera>
+	</a-scene>
+
+	<script type="module">
+	    document.querySelector("a-scene")
+
+	    import { StereoscopicEffects } from "https://cdn.jsdelivr.net/npm/threejs-stereoscopiceffects@1.5.0/src/StereoscopicEffects.js";
+
+	    const scene = document.querySelector("a-scene");
+
+	    scene.addEventListener("renderstart", () => {
+	        const stereo = new StereoscopicEffects({
+	            renderer: scene.renderer,
+	            defaultEffect: 2,
+	            inject: true
+	        });
+
+	        stereo.setEyeSeparation(0.0631);
+	    });
+	</script>
+
+        <script>
+                const ws = new WebSocket("ws://" + location.host + "/sock");
+
+                ws.onopen = () => {
+                	console.log("WebSocket connected!");
+                	ws.send("webInit_PSVR");
+                };
+
+                ws.onmessage = (event) => {
+                	console.log("XBOX VR:", event.data);
+ 		};
+        </script>
+</body>
+

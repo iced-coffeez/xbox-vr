@@ -1,0 +1,49 @@
+#!/bin/python3
+
+from simple_websocket import ConnectionClosed
+from flask import Flask, render_template
+from flask_sock import Sock
+import headset
+
+f = None
+
+app = Flask(__name__)
+
+app.config["SOCK_SERVER_OPTIONS"] = {
+        "ping_interval": 25
+}
+
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+sock = Sock(app)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@sock.route("/sock")
+def websocket(ws):
+    print("WebSocket go brr")
+
+    ws.send("prep_site")
+    
+    try:
+        while True:
+            message = ws.receive()
+
+            if message is None:
+                print("WebSocket disconnected")
+                break
+        
+            if message == "webInit_PSVR":
+                ws.send("Initializing PSVR 1...")
+                headset.psvrControl = f
+                headset.start()
+
+            print("Browser:", message)
+    except ConnectionClosed:
+        print("WebSocket disconnected")
+        headset.turn_off()
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80, debug=True)
