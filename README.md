@@ -26,8 +26,10 @@ Currently:
 
 PSVR 1
 
-# Installing
+# Running
 To do this, you need to clone the GitHub repository. You can achieve this by:  
-<code>git clone https://github.com/iced-coffeez/xbox-vr</code>
+<code>git clone https://github.com/iced-coffeez/xbox-vr &&  
+cd xbox-vr;  
+sudo python3 main.py</code>
 
 # brb ill finish l8r
