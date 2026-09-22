@@ -31,8 +31,10 @@ PSVR 1
 
 # Setup
 To do this, you need to clone the GitHub repository. You can achieve this by:  
-<code>git clone https://github.com/iced-coffeez/xbox-vr  
-cd xbox-vr</code>
+```bash
+git clone https://github.com/iced-coffeez/xbox-vr  
+cd xbox-vr
+```
 
 After this, you will want to decide on which headset you want to use. Make sure it's supported (or just force it to be) and then change:  
 
