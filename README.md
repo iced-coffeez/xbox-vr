@@ -34,7 +34,7 @@ To do this, you need to clone the GitHub repository. You can achieve this by:
 <code>git clone https://github.com/iced-coffeez/xbox-vr  
 cd xbox-vr</code>
 
-After this, you will want to hook up your headset of choice (if its supported—or you could just force it to be if you write your own drivers for it) and then modify:
+After this, you will want to decide on which headset you want to use. Make sure it's supported (or just force it to be) and then change:  
 
 "vr" in `main.py` and  
 "vr" in `headset.py`  
@@ -61,6 +61,8 @@ If neither work, try using just `pip` instead—or vice versa. In either option.
 
 # Running
 Finally, you are ready to run XBOX VR—after all of that pain.  
+
+After this, you will want to hook up your headset of choice (if its supported—or you could just force it to be if you write your own drivers for it).  
 
 From the root of the project directory, run:  
 `sudo python3 main.py # sudo is optional if you're root—it would be redundant.`
