@@ -1,0 +1,47 @@
+<head>
+        <title>XBOX VR</title>
+
+	<script type="importmap">
+		{
+		         "imports": {
+		    		 "three": "/static/js/three/three.module.js",
+	           		 "three/addons/": "/static/js/three/jsm/"
+			}
+		}
+	</script>
+</head>
+
+<body>	
+
+        <style>
+        	html, body {
+                    background-color: rgb(12,12,12);
+                    text-align: center;
+                }
+                
+                h1, h2, h3, h4, h5, h6 {
+                    font-family: sans-serif;
+                    color: white;
+                }
+        </style>
+
+        <!-- <h1>
+        	XBOX VR
+	</h1> --!>
+
+
+
+        <script>
+                const ws = new WebSocket("ws://" + location.host + "/sock");
+
+                ws.onopen = () => {
+                	console.log("WebSocket connected!");
+                	ws.send("webInit_PSVR");
+                };
+
+                ws.onmessage = (event) => {
+                	console.log("XBOX VR:", event.data);
+ 		};
+        </script>
+</body>
+

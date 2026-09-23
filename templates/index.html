@@ -1,76 +1,100 @@
-<head>
-        <title>XBOX VR</title>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - effects - stereo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta property="og:title" content="three.js webgl - effects - stereo">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://threejs.org/examples/webgl_effects_stereo.html">
+		<meta property="og:image" content="https://threejs.org/examples/screenshots/webgl_effects_stereo.jpg">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
 
-	<script src="/static/js/aframe/aframe.min.js"></script>
-</head>
+	<body>
 
-<body>	
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
 
-        <style>
-        	html, body {
-                    background-color: rgb(12,12,12);
-                    text-align: center;
-                }
-                
-                h1, h2, h3, h4, h5, h6 {
-                    font-family: sans-serif;
-                    color: white;
-                }
-        </style>
+		<script type="module">
 
-        <!-- <h1>
-        	XBOX VR
-	</h1> --!>
+			import * as THREE from 'three';
 
-	<a-scene>
-	    <a-box
-	        position="0 1.6 -3"
-	        rotation="0 45 0"
-	        color="red">
-	    </a-box>
+			import { StereoEffect } from 'three/addons/effects/StereoEffect.js';
 
-	    <a-plane
-	        position="0 0 -4"
-	        rotation="-90 0 0"
-	        width="20"
-	        height="20"
-	        color="#333">
-	    </a-plane>
+			let container, camera, scene, renderer, effect;
 
-	    <a-sky color="#111"></a-sky>
+			init();
 
-	    <a-camera position="0 1.6 0"></a-camera>
-	</a-scene>
+			function init() {
 
-	<script type="module">
-	    document.querySelector("a-scene")
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
 
-	    import { StereoscopicEffects } from "https://cdn.jsdelivr.net/npm/threejs-stereoscopiceffects@1.5.0/src/StereoscopicEffects.js";
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
+				camera.position.z = 3;
 
-	    const scene = document.querySelector("a-scene");
+				scene = new THREE.Scene();
 
-	    scene.addEventListener("renderstart", () => {
-	        const stereo = new StereoscopicEffects({
-	            renderer: scene.renderer,
-	            defaultEffect: 2,
-	            inject: true
-	        });
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setAnimationLoop( animate );
+				container.appendChild( renderer.domElement );
 
-	        stereo.setEyeSeparation(0.0631);
-	    });
-	</script>
+				effect = new StereoEffect( renderer );
+				effect.setSize( window.innerWidth, window.innerHeight );
 
-        <script>
-                const ws = new WebSocket("ws://" + location.host + "/sock");
+				//
 
+				window.addEventListener( 'resize', onWindowResize );
+
+			}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				effect.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = ( event.clientX - windowHalfX ) * 0.01;
+				mouseY = ( event.clientY - windowHalfY ) * 0.01;
+
+			}
+
+			//
+
+			function animate() {
+				effect.render( scene, camera );
+
+			}
+
+		</script>
+
+		<script>
+               const ws = new WebSocket("ws://" + location.host + "/sock");
+		
                 ws.onopen = () => {
-                	console.log("WebSocket connected!");
-                	ws.send("webInit_PSVR");
+	                	console.log("WebSocket connected!");
+	                	ws.send("webInit_PSVR");
                 };
-
+		
                 ws.onmessage = (event) => {
-                	console.log("XBOX VR:", event.data);
- 		};
-        </script>
-</body>
-
+	                	console.log("XBOX VR:", event.data);
+		 		};
+		</script>
+	</body>
+</html>
