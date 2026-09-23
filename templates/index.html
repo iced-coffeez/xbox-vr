@@ -8,18 +8,18 @@
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://threejs.org/examples/webgl_effects_stereo.html">
 		<meta property="og:image" content="https://threejs.org/examples/screenshots/webgl_effects_stereo.jpg">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<!-- <link type="text/css" rel="stylesheet" href="main.css"> !-->
 	</head>
 
 	<body>
 
 		<script type="importmap">
-			{
-				"imports": {
-					"three": "../build/three.module.js",
-					"three/addons/": "./jsm/"
-				}
-			}
+		{
+		  "imports": {
+		    "three": "/static/js/three/three.module.js",
+		    "three/addons/": "/static/js/three/jsm/"
+		  }
+		}
 		</script>
 
 		<script type="module">
@@ -57,10 +57,6 @@
 			}
 
 			function onWindowResize() {
-
-				windowHalfX = window.innerWidth / 2;
-				windowHalfY = window.innerHeight / 2;
-
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
