@@ -108,6 +108,11 @@
 		</script>
 
 		<script>
+			let lastTime = null;
+			let yaw = 0;
+			let pitch = 0;
+			let roll = 0;
+
 			function runVr() {
 		               const ws = new WebSocket("ws://" + location.host + "/sock");
 
@@ -117,6 +122,8 @@
 			                	console.log("WebSocket connected!");
 			                	ws.send("webInit_PSVR");
 						init();
+
+						lastTime = performance.now();
 						
 						ws.send("disable_gameMode");
 		                };
@@ -131,9 +138,13 @@
 
 						const view = new DataView(data.buffer);
 
-						const yaw = (view.getInt16(20, true) / 32768) * 2000 * (Math.PI / 180)
-						const pitch = (view.getInt16(22, true) / 32768) * 2000 * (Math.PI / 180)
-						const roll = (view.getInt16(24, true) / 32768) * 2000 * (Math.PI / 180)
+						const now = performance.now();
+						const dt = (now / lastTime) / 1000;
+						lastTime = now;
+
+						yaw += (view.getInt16(20, true) / 32768) * 2000 * (Math.PI / 180) * dt;
+						pitch += (view.getInt16(22, true) / 32768) * 2000 * (Math.PI / 180) * dt;
+						roll += (view.getInt16(24, true) / 32768) * 2000 * (Math.PI / 180) * dt;
 
 						console.log(yaw + ', ' + pitch + ', ' + roll);
 
