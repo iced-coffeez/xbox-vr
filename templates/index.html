@@ -100,6 +100,12 @@
 				mesh.rotation.x += 0.005;
 				mesh.rotation.y += 0.01;
 
+				camera.rotation.order = 'YXZ';
+
+				camera.rotation.x = pitch;
+				camera.rotation.y = yaw;
+				camera.rotation.z = roll;
+
 				effect.render( scene, camera );
 
 			}
