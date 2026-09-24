@@ -23,8 +23,10 @@ def find_hidraw(interface):
 
 if (vr.lower() == "psvr"):
     psvrControl = open(find_hidraw(5), "wb", buffering=0)
+    psvrRead = open(find_hidraw(4), "rb", buffering=0)
 
     headset.psvrControl = psvrControl
     
     webserver.f = psvrControl
+    webserver.read = psvrRead
     webserver.app.run(host="0.0.0.0", port=80, debug=True)

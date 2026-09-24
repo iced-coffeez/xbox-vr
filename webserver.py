@@ -6,6 +6,9 @@ from flask_sock import Sock
 import headset
 
 f = None
+read = None
+
+gm = False
 
 app = Flask(__name__)
 
@@ -31,6 +34,10 @@ def websocket(ws):
         while True:
             message = ws.receive()
 
+            data = read.read(64)
+
+            ws.send(data)
+
             if message is None:
                 print("WebSocket disconnected")
                 break
@@ -40,10 +47,19 @@ def websocket(ws):
                 headset.psvrControl = f
                 headset.start()
 
+            if message == "enable_gameMode":
+                gm = True
+                ws.send("Game Mode enabled... Headset will not turn off on disconnect.")
+
+            if message == "disable_gameMode":
+                gm = False
+                ws.send("Game Mode disabled... Headset will turn off on disconnect.")
+
             print("Browser:", message)
     except ConnectionClosed:
         print("WebSocket disconnected")
-        headset.turn_off()
+        if gm == False:
+            headset.turn_off()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)

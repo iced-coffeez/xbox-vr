@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - effects - stereo</title>
+		<title>XBOX VR - Home Menu</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta property="og:title" content="three.js webgl - effects - stereo">
@@ -11,7 +11,23 @@
 		<!-- <link type="text/css" rel="stylesheet" href="main.css"> !-->
 	</head>
 
+	<style>
+		html, body {
+			background-color: rgb(3,3,3);
+			text-align: center;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			color: white;
+			font-family: sans-serif;
+		}
+	</style>
+
 	<body>
+
+		<h1>XBOX VR</h1>
+
+		<button>Enter VR</button>
 
 		<script type="importmap">
 		{
@@ -28,9 +44,7 @@
 
 			import { StereoEffect } from 'three/addons/effects/StereoEffect.js';
 
-			let container, camera, scene, renderer, effect;
-
-			init();
+			let container, camera, scene, renderer, effect, mesh;
 
 			function init() {
 
@@ -42,10 +56,19 @@
 
 				scene = new THREE.Scene();
 
+				const geometry = new THREE.BoxGeometry();
+
+				mesh = new THREE.Mesh( geometry );
+				scene.add(mesh);
+
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setAnimationLoop( animate );
 				container.appendChild( renderer.domElement );
+
+				renderer.domElement.requestFullscreen();
+
+				document.body.style.cursor = 'none';
 
 				effect = new StereoEffect( renderer );
 				effect.setSize( window.innerWidth, window.innerHeight );
@@ -74,23 +97,57 @@
 			//
 
 			function animate() {
+				mesh.rotation.x += 0.005;
+				mesh.rotation.y += 0.01;
+
 				effect.render( scene, camera );
 
 			}
 
+			window.init = init;
 		</script>
 
 		<script>
-               const ws = new WebSocket("ws://" + location.host + "/sock");
+			function runVr() {
+		               const ws = new WebSocket("ws://" + location.host + "/sock");
+
+				ws.binaryType = "arraybuffer";
 		
-                ws.onopen = () => {
-	                	console.log("WebSocket connected!");
-	                	ws.send("webInit_PSVR");
-                };
+		                ws.onopen = () => {
+			                	console.log("WebSocket connected!");
+			                	ws.send("webInit_PSVR");
+						init();
+						
+						ws.send("disable_gameMode");
+		                };
 		
-                ws.onmessage = (event) => {
-	                	console.log("XBOX VR:", event.data);
+		                ws.onmessage = (event) => {
+						if (typeof event.data == "string") {
+			                		console.log("XBOX VR:", event.data);
+							return;
+						}
+
+						const data = new Uint8Array(event.data);
+
+						const view = new DataView(data.buffer);
+
+						const yaw = (view.getInt16(20, true) / 32768) * 2000 * (Math.PI / 180)
+						const pitch = (view.getInt16(22, true) / 32768) * 2000 * (Math.PI / 180)
+						const roll = (view.getInt16(24, true) / 32768) * 2000 * (Math.PI / 180)
+
+						console.log(yaw + ', ' + pitch + ', ' + roll);
+
+						ws.send("PULSE")
 		 		};
+
+				
+			}
+
+			const button = document.querySelector('button');
+
+			button.addEventListener("click", (event) => {
+				runVr();
+			});
 		</script>
 	</body>
 </html>
