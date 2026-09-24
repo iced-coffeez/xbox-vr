@@ -104,7 +104,7 @@
 
 				camera.rotation.x = pitch;
 				camera.rotation.y = yaw;
-				camera.rotation.z = roll;
+				camera.rotation.z = -roll;
 
 				effect.render( scene, camera );
 
@@ -145,7 +145,7 @@
 						const view = new DataView(data.buffer);
 
 						const now = performance.now();
-						const dt = (now / lastTime) / 1000;
+						const dt = (now - lastTime) / 1000;
 						lastTime = now;
 
 						yaw += (view.getInt16(20, true) / 32768) * 2000 * (Math.PI / 180) * dt;
@@ -154,7 +154,7 @@
 
 						console.log(yaw + ', ' + pitch + ', ' + roll);
 
-						ws.send("PULSE")
+						// ws.send("PULSE")
 		 		};
 
 				

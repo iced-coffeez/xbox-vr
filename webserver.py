@@ -32,15 +32,11 @@ def websocket(ws):
     
     try:
         while True:
-            message = ws.receive()
+            message = ws.receive(timeout=0)
 
             data = read.read(64)
 
             ws.send(data)
-
-            if message is None:
-                print("WebSocket disconnected")
-                break
         
             if message == "webInit_PSVR":
                 ws.send("Initializing PSVR 1...")
