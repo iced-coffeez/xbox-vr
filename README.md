@@ -77,7 +77,7 @@ After this, you will want to hook up your headset of choice (if its supported—
 
 From the root of the project directory, run:  
 ```bash
-sudo python3 main.py # sudo is optional if you're root—it would be redundant.
+sudo .venv/bin/python main.py # sudo is optional if you're root—it would be redundant.
 ```
 
 
