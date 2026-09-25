@@ -76,3 +76,6 @@ From the root of the project directory, run:
 ```bash
 sudo python3 main.py # sudo is optional if you're root—it would be redundant.
 ```
+
+
+After that, connect to the Pi's IP on your XBOX and you should be **good to go!**
