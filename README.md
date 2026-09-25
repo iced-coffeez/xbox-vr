@@ -4,6 +4,9 @@
 ## Intro
 Hello, and welcome to this humble little project! I just thought about doing something like this a few years back, and then just forgot about it. I wanted to be able to fulfill the promise that Microsoft made back in the early days of the XBOX One—the promise of virtual reality. Now, I'm going to state this multiple times throughout the project, but... <u>**you do NOT need a modded console. This setup only requires some type of computer—preferably a Pi 4 or newer—and does NOT need any sort of modifications to your console! Soft or hard mods! NOT REQUIRED!**</u>
 
+Small rundown:
+This allows you to use some VR (Virtual Reality) headsets with the XBOX One or newer. The project may work on some other consoles—but there are **no guarantees.** By the way, this project runs on your XBOX in Microsoft Edge and utilizes WebSockets and uses three.js. Also, this requires **NO MODIFICATIONS TO YOUR CONSOLE!** An experimental feature is planned that allows you to view games in full 3D that moves your camera back and forth and stitches two views together, but I doubt that this would make it into the final cut. This project is planned to have a Meta Quest release, which I think will work beautifully.
+
 Anyway, enough yapping. Let's move to the project.
 ## Prerequisites - Hardware
 So, you need some sort of computer that can provide:
